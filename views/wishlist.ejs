@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Wishlist</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap');
+
+body{
+    margin:0;
+    background:#fff7f2;
+    font-family:'Fredoka', sans-serif;
+    color:#333;
+}
+
+/* CONTAINER */
+
+.container{
+    padding:40px 6%;
+}
+
+/* TITLE */
+
+.wishlist-title{
+    text-align:center;
+    font-size:55px;
+    margin-bottom:15px;
+    color:#4a3434;
+    font-family:'Pacifico', cursive;
+}
+
+.wishlist-sub{
+    text-align:center;
+    color:#777;
+    margin-bottom:45px;
+    font-size:18px;
+}
+
+/* PRODUCTS GRID */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:28px;
+}
+
+/* CARD */
+
+.card{
+    background:#fffaf7;
+    border-radius:28px;
+    overflow:hidden;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    border:2px solid white;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+/* IMAGE */
+
+.card-image{
+    width:100%;
+    height:320px;
+    overflow:hidden;
+}
+
+.card-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.4s;
+}
+
+.card:hover img{
+    transform:scale(1.05);
+}
+
+/* CONTENT */
+
+.card-content{
+    padding:20px;
+    text-align:center;
+}
+
+.product-name{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:10px;
+    color:#4a3434;
+}
+
+.price{
+    font-size:26px;
+    font-weight:bold;
+    color:#d48c6a;
+    margin-bottom:20px;
+}
+
+/* BUTTONS */
+
+.actions{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+}
+
+.btn{
+    border:none;
+    padding:13px 18px;
+    border-radius:40px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+    font-size:15px;
+}
+
+.cart-btn{
+    background:#f3c8aa;
+    color:white;
+}
+
+.cart-btn:hover{
+    background:#dfac89;
+}
+
+.remove-btn{
+    background:#ffe1ea;
+    color:#ff4f81;
+}
+
+.remove-btn:hover{
+    background:#ffd1df;
+}
+
+/* EMPTY */
+
+.empty{
+    background:white;
+    padding:60px 30px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+.empty h2{
+    font-size:34px;
+    margin-bottom:15px;
+    color:#4a3434;
+}
+
+.empty p{
+    color:#777;
+    margin-bottom:25px;
+    font-size:18px;
+}
+
+.shop-btn{
+    display:inline-block;
+    background:#f3c8aa;
+    color:white;
+    padding:14px 26px;
+    border-radius:40px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .wishlist-title{
+        font-size:40px;
+    }
+
+    .products{
+        grid-template-columns:1fr 1fr;
+        gap:16px;
+    }
+
+    .card-image{
+        height:200px;
+    }
+
+    .product-name{
+        font-size:18px;
+    }
+
+    .price{
+        font-size:20px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container">
+
+    <h1 class="wishlist-title">
+        Your Wishlist ❤️
+    </h1>
+
+    <p class="wishlist-sub">
+        Your favorite little picks saved with love ✨
+    </p>
+
+    <% if(!wishlist || wishlist.length === 0){ %>
+
+        <div class="empty">
+
+            <h2>
+                Wishlist is Empty 🧸
+            </h2>
+
+            <p>
+                Save your favorite products here
+            </p>
+
+            <a href="/products/shop" class="shop-btn">
+                Explore Shop
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+        <div class="products">
+
+            <% wishlist.forEach(product => { %>
+
+                <div class="card">
+
+                    <a href="/products/product/<%= product._id %>">
+
+                        <div class="card-image">
+
+                            <% if(product.image && product.image.length > 0){ %>
+
+                                <img src="/uploads/<%= product.image[0] %>">
+
+                            <% } else { %>
+
+                                <img src="https://via.placeholder.com/300">
+
+                            <% } %>
+
+                        </div>
+
+                    </a>
+
+                    <div class="card-content">
+
+                        <div class="product-name">
+                            <%= product.name %>
+                        </div>
+
+                        <div class="price">
+                            ₹ <%= product.price %>
+                        </div>
+
+                        <div class="actions">
+
+                            <a href="/products/addtocart/<%= product._id %>">
+
+                                <button class="btn cart-btn">
+                                    Add To Cart 🛒
+                                </button>
+
+                            </a>
+
+                            <a href="/products/removewishlist/<%= product._id %>">
+
+                                <button class="btn remove-btn">
+                                    Remove
+                                </button>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } %>
+
+</div>
+
+</body>
+</html>

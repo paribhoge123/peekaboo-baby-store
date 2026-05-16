@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap');
+
+body{
+    margin:0;
+    background:#fff7f2;
+    font-family:'Fredoka', sans-serif;
+    color:#333;
+}
+
+/* CONTAINER */
+
+.container{
+    padding:40px 6%;
+}
+
+/* TITLE */
+
+.cart-title{
+    text-align:center;
+    font-size:55px;
+    color:#4a3434;
+    margin-bottom:40px;
+    font-family:'Pacifico', cursive;
+}
+
+/* EMPTY */
+
+.empty{
+    background:white;
+    padding:60px 30px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+.empty p{
+    font-size:22px;
+    color:#777;
+}
+
+/* CART ITEM */
+
+.item{
+    background:#fffaf7;
+    border-radius:30px;
+    padding:20px;
+    margin-bottom:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    transition:0.3s;
+}
+
+.item:hover{
+    transform:translateY(-4px);
+}
+
+/* LEFT SIDE */
+
+.left{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+/* PRODUCT IMAGE */
+
+.product-image{
+    width:120px;
+    height:120px;
+    border-radius:25px;
+    overflow:hidden;
+    background:#eee;
+    flex-shrink:0;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* PRODUCT INFO */
+
+.info h3{
+    margin:0;
+    font-size:24px;
+    color:#4a3434;
+}
+
+.info p{
+    margin-top:10px;
+    color:#d48c6a;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* QTY */
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    background:white;
+    padding:10px 18px;
+    border-radius:40px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.qty span{
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* BUTTONS */
+
+.btn{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:#f3c8aa;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#dfac89;
+}
+
+/* TOTAL */
+
+.total-box{
+    margin-top:40px;
+    background:white;
+    border-radius:30px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+.total-box h2{
+    font-size:38px;
+    margin-bottom:25px;
+    color:#4a3434;
+}
+
+/* CHECKOUT */
+
+.checkout-btn{
+    padding:16px 34px;
+    border:none;
+    border-radius:40px;
+    background:#f3c8aa;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.checkout-btn:hover{
+    background:#dfac89;
+}
+
+.checkout-btn{
+    padding:16px 34px;
+    border:none;
+    border-radius:40px;
+    background:#f3c8aa;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.checkout-btn:hover{
+    background:#dfac89;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .cart-title{
+        font-size:40px;
+    }
+
+    .item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .left{
+        width:100%;
+    }
+
+    .product-image{
+        width:90px;
+        height:90px;
+    }
+
+    .info h3{
+        font-size:20px;
+    }
+
+    .total-box h2{
+        font-size:30px;
+    }
+
+}
+
+</style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container">
+
+    <h1 class="cart-title">
+    Your Cart 🛒
+</h1>
+
+    <% if(!cart || cart.length === 0){ %>
+
+        <div class="empty">
+            <p>Cart is empty</p>
+        </div>
+
+    <% } else { %>
+
+        <% cart.forEach(function(item){ %>
+
+            <% if(item.product){ %>
+
+                <div class="item">
+
+    <div class="left">
+
+        <div class="product-image">
+
+            <% if(item.product.image && item.product.image.length > 0){ %>
+
+                <img src="/uploads/<%= item.product.image[0] %>">
+
+            <% } else { %>
+
+                <img src="https://via.placeholder.com/300">
+
+            <% } %>
+
+        </div>
+
+        <div class="info">
+
+            <h3>
+                <%= item.product.name %>
+            </h3>
+
+            <p>
+                ₹ <%= item.product.price %>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="qty">
+
+        <a href="/users/decrease/<%= item.product._id %>">
+            <button class="btn">−</button>
+        </a>
+
+        <span>
+            <%= item.quantity %>
+        </span>
+
+        <a href="/users/increase/<%= item.product._id %>">
+            <button class="btn">+</button>
+        </a>
+
+    </div>
+
+</div>
+
+            <% } %>
+
+        <% }) %>
+
+        <div class="total-box">
+
+    <h2>
+        Total: ₹ <%= total %>
+    </h2>
+
+    <div class="checkout">
+            <a href="/users/checkout">
+
+   <button class="checkout-btn">
+    Proceed To Checkout 💳
+</button>
+
+</a>
+        </div>
+        </div>
+
+    <% } %>
+
+</div>
+
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+console.log("SCRIPT LOADED");
+
+document.getElementById("payBtn").onclick = async function(){
+
+    console.log("FETCH STARTED");
+
+    try{
+
+       const response = await fetch("/products/create-order", {
+    method: "POST",
+    credentials: "same-origin"
+});
+
+        const data = await response.json();
+
+        console.log("DATA:", data);
+
+        const options = {
+
+            key: data.key,
+
+            amount: data.amount,
+
+            currency: "INR",
+
+            name: "Baby Store",
+
+            description: "Order Payment",
+
+            order_id: data.orderId,
+
+            handler: function (response){
+
+                alert("Payment Successful 😄");
+
+                window.location.href = "/success";
+            }
+
+        };
+
+        const rzp = new Razorpay(options);
+
+        rzp.open();
+
+    }
+
+    catch(err){
+
+        console.log("ERROR:", err);
+
+        alert("Payment Failed");
+
+    }
+
+};
+
+</script>
+</body>
+</html>

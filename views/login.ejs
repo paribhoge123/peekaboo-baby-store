@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(
+                to bottom,
+                #fff7f2,
+                #fdf6ef
+            );
+            font-family:'Fredoka', sans-serif;
+        }
+
+        .login-box{
+            background:white;
+            padding:50px;
+            width:400px;
+            border-radius:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .login-box h1{
+            color:#d48c6a;
+            margin-bottom:10px;
+            font-size:40px;
+        }
+
+        .login-box p{
+            color:#777;
+            margin-bottom:30px;
+        }
+
+        input{
+            width:100%;
+            padding:14px;
+            margin:12px 0;
+            border-radius:15px;
+            border:1px solid #ddd;
+            font-size:16px;
+            outline:none;
+        }
+
+        input:focus{
+            border:1px solid #d48c6a;
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:30px;
+            background:#e8b89b;
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            margin-top:15px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#d79f7d;
+            transform:translateY(-2px);
+        }
+
+        .bottom-text{
+            margin-top:20px;
+            color:#666;
+        }
+
+        .bottom-text a{
+            color:#d48c6a;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .emoji{
+            font-size:55px;
+            margin-bottom:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="emoji">
+            🍼
+        </div>
+
+        <h1>
+            Welcome Back
+        </h1>
+
+        <p>
+            Login to continue shopping for your little one ✨
+        </p>
+
+        <form action="/users/login" method="POST">
+
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="Enter Email" 
+                required 
+            />
+
+            <input 
+                type="password" 
+                name="password" 
+                placeholder="Enter Password" 
+                required 
+            />
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <div class="bottom-text">
+
+            Don’t have an account?
+
+            <a href="/users/register">
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

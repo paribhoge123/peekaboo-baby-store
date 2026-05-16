@@ -9,17 +9,47 @@ const userSchema = mongoose.Schema({
     },
     email  : String,
     password : String,
-    cart :{
-        type : Array,
-        default : []
+    cart: [
+  {
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "products"
     },
-    isadmin : Boolean,
-    orders :{
-        type : Array,
-        default : []
-    },
+    quantity: {
+      type: Number,
+      default: 1
+    }
+  }
+],
+    
+    orders: [
+    {
+        products: [
+            {
+                product: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "products"
+                },
+                quantity: Number
+            }
+        ],
+        totalAmount: Number,
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }
+],
     contact : Number,
     picture : String,
+
+    wishlist: [
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "products"
+    }
+
+],
 });
 
- mongoose.exports  = mongoose.model("users", userSchema);
+ module.exports  = mongoose.model("users", userSchema);

@@ -1,0 +1,308 @@
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* NAVBAR */
+
+.navbar{
+    width:100%;
+    background:#fff;
+    padding:18px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-sizing:border-box;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    overflow:visible;
+}
+
+
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:34px;
+    font-weight:bold;
+    color:#d48c6a;
+    font-family:'Fredoka', sans-serif;
+}
+
+.logo img{
+    width:50px;
+    height:50px;
+    object-fit:contain;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:35px;
+    margin-left:auto;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#3f3f3f;
+    font-weight:600;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#d48c6a;
+}
+
+/* SEARCH */
+
+.search-form{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.search-form input{
+    padding:12px 18px;
+    border-radius:30px;
+    border:1px solid #eee;
+    outline:none;
+    background:white;
+    width:220px;
+    font-family:'Fredoka', sans-serif;
+}
+
+.search-form button{
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    background:#f3c8aa;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.search-form button:hover{
+    background:#dfac89;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+    position:relative;
+}
+
+.dropdown-content{
+    position:absolute;
+    top:160%;
+    left:0;
+    background:white;
+    min-width:230px;
+    border-radius:20px;
+    display:none;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    padding:10px 0;
+    z-index:99999;
+}
+
+
+.dropdown-content a{
+    display:block;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:16px;
+}
+
+.dropdown-content a:hover{
+    background:#fff2ea;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+/* LOGOUT BUTTON */
+
+.logout-btn{
+    background:#f3c8aa;
+    color:white !important;
+    padding:12px 22px;
+    border-radius:30px;
+}
+
+.logout-btn:hover{
+    background:#dfac89;
+    color:white !important;
+}
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:34px;
+    font-weight:bold;
+    color:#d48c6a;
+    margin-right:40px;
+}
+
+/* .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:50%;
+} */
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:20px;
+        padding:20px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .search-form{
+        width:100%;
+        justify-content:center;
+    }
+
+    .search-form input{
+        width:100%;
+    }
+
+}
+
+</style>
+
+<div class="navbar">
+
+    <!-- LOGO -->
+
+   <div class="logo">
+
+    <img src="/uploads/logo.png" alt="Logo">
+
+    <span>
+        Peekaboo 🍼
+    </span>
+
+</div>
+
+    <!-- NAV LINKS -->
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <!-- DROPDOWN -->
+
+        <div class="dropdown">
+
+            <a href="/products/shop">
+                Shop ▼
+            </a>
+
+            <div class="dropdown-content">
+
+                <a href="/products/shop?category=Boys Fashion">
+                    👕 Boys Fashion
+                </a>
+
+                <a href="/products/shop?category=Girl Fashion">
+                    🎀 Girl Fashion
+                </a>
+
+                <a href="/products/shop?category=Footwear">
+                    👟 Footwear
+                </a>
+
+                <a href="/products/shop?category=Toys">
+                    🧸 Toys
+                </a>
+
+                <a href="/products/shop?category=Feeding">
+                    🍼 Feeding
+                </a>
+
+                <a href="/products/shop?category=Bath">
+                    🛁 Bath
+                </a>
+
+                <a href="/products/shop?category=Nursery">
+                    🛏️ Nursery
+                </a>
+
+                <a href="/products/shop?category=Books">
+                    📚 Books
+                </a>
+
+            </div>
+
+        </div>
+
+        <a href="/users/cart">Cart 🛒</a>
+
+        <a href="/users/orders">Orders 📦</a>
+
+        <a href="/users/wishlist">Wishlist ❤️</a>
+
+        <% if(user && user.email === "pari@gmail.com"){ %>
+
+            <a href="/products/admin">
+                Admin ⚙️
+            </a>
+
+        <% } %>
+
+        <a href="/users/logout" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <form 
+    action="/products/search"
+    method="GET"
+    class="search-form"
+>
+
+    <input 
+        type="text"
+        name="search"
+        placeholder="Search cute products..."
+        required
+    >
+
+    <button type="submit">
+        🔍
+    </button>
+
+</form>
+
+</div>

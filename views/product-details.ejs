@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title><%= product.name %></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap');
+
+body{
+    margin:0;
+    background:#fff7f2;
+    font-family:'Fredoka', sans-serif;
+    color:#333;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:40px 6%;
+}
+
+/* MAIN CARD */
+
+.product-wrapper{
+    background:#fffaf7;
+    border-radius:35px;
+    padding:35px;
+    display:flex;
+    gap:45px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* LEFT SIDE */
+
+.left{
+    flex:1;
+}
+
+.main-image{
+    width:100%;
+    height:560px;
+    border-radius:28px;
+    overflow:hidden;
+    background:#eee;
+}
+
+.main-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:white;
+}
+
+/* THUMBNAILS */
+
+.thumbnail-row{
+    display:flex;
+    gap:15px;
+    margin-top:18px;
+}
+
+.thumbnail{
+    width:90px;
+    height:90px;
+    border-radius:18px;
+    overflow:hidden;
+    border:3px solid #fff;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.thumbnail img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:white;
+    cursor:pointer;
+}
+.thumbnail:hover{
+    transform:scale(1.05);
+    border-color:#f3c8aa;
+}
+
+/* RIGHT SIDE */
+
+.right{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+/* CATEGORY */
+
+.category{
+    display:inline-block;
+    background:#ffe7d6;
+    color:#d48c6a;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:18px;
+    width:max-content;
+}
+
+/* TITLE */
+
+.product-title{
+    font-size:52px;
+    color:#4a3434;
+    margin-bottom:18px;
+}
+
+/* RATING */
+
+.rating{
+    color:#ff9f43;
+    font-weight:bold;
+    font-size:18px;
+    margin-bottom:18px;
+}
+
+/* PRICE */
+
+.price{
+    font-size:46px;
+    color:#d48c6a;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* DESCRIPTION */
+
+.description{
+    color:#666;
+    line-height:1.8;
+    font-size:18px;
+    margin-bottom:28px;
+}
+
+/* FEATURES */
+
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.feature{
+    background:white;
+    padding:12px 18px;
+    border-radius:30px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    font-size:15px;
+}
+
+/* DELIVERY */
+
+.delivery{
+    background:#fff;
+    padding:18px;
+    border-radius:20px;
+    margin-bottom:30px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.04);
+}
+
+.delivery input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:1px solid #ddd;
+    margin-top:12px;
+    font-family:'Fredoka', sans-serif;
+}
+
+/* BUTTONS */
+
+.actions{
+    display:flex;
+    gap:18px;
+}
+
+.btn{
+    border:none;
+    padding:16px 28px;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.cart-btn{
+    background:#f3c8aa;
+    color:white;
+    flex:1;
+}
+
+.cart-btn:hover{
+    background:#dfac89;
+}
+
+.wishlist-btn{
+    background:#ffe1ea;
+    color:#ff4f81;
+    width:70px;
+    font-size:24px;
+}
+
+.wishlist-btn:hover{
+    background:#ffd1df;
+}
+
+/* REAL RATING */
+
+.rating{
+    margin:15px 0;
+    color:#ff9800;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* REVIEWS */
+
+.reviews-section{
+    margin-top:40px;
+}
+
+.reviews-section h2{
+    margin-bottom:25px;
+    color:#4a3434;
+}
+
+.review-form{
+    background:white;
+    padding:25px;
+    border-radius:25px;
+    margin-bottom:35px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.review-form select,
+.review-form textarea{
+    padding:14px;
+    border-radius:14px;
+    border:1px solid #eee;
+    font-size:15px;
+}
+
+.review-form textarea{
+    min-height:120px;
+    resize:none;
+}
+
+.review-form button{
+    width:220px;
+    padding:14px;
+    border:none;
+    border-radius:16px;
+    background:#f3c8aa;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.review-card{
+    background:white;
+    padding:22px;
+    border-radius:22px;
+    margin-bottom:20px;
+}
+
+.review-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.review-top span{
+    color:#ff9800;
+    font-weight:bold;
+}
+
+.no-review{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .product-wrapper{
+        flex-direction:column;
+        padding:20px;
+    }
+
+    .main-image{
+        height:380px;
+    }
+
+    .product-title{
+        font-size:38px;
+    }
+
+    .price{
+        font-size:34px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container">
+
+    <div class="product-wrapper">
+
+        <!-- LEFT -->
+
+        <div class="left">
+
+            <div class="main-image">
+
+    <% if(product.image && product.image.length > 0){ %>
+
+        <img 
+            id="mainProductImage"
+            src="/uploads/<%= product.image[0] %>"
+        >
+
+    <% } else { %>
+
+        <img 
+            id="mainProductImage"
+            src="https://via.placeholder.com/500"
+        >
+
+    <% } %>
+
+</div>
+
+            <!-- THUMBNAILS -->
+
+            <div class="thumbnail-row">
+
+                <% if(product.image && product.image.length > 0){ %>
+
+                    <% product.image.forEach(img => { %>
+
+<div class="thumbnail">
+
+    <img 
+        src="/uploads/<%= img %>"
+        onclick="
+            document.getElementById('mainProductImage').src=this.src
+        "
+    >
+
+</div>
+
+                    <% }) %>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="right">
+
+            <div class="category">
+                <%= product.category %>
+            </div>
+
+            <h1 class="product-title">
+                <%= product.name %>
+            </h1>
+
+            <%
+    let avgRating = 0;
+
+    if(product.reviews && product.reviews.length > 0){
+
+        let total = 0;
+
+        product.reviews.forEach(r => {
+            total += r.rating;
+        });
+
+        avgRating = (total / product.reviews.length).toFixed(1);
+
+    }
+%>
+
+<div class="rating">
+
+    ⭐ <%= avgRating || "0" %>
+
+    (<%= product.reviews ? product.reviews.length : 0 %> reviews)
+
+</div>
+
+            <div class="price">
+                ₹ <%= product.price %>
+            </div>
+
+            <div class="description">
+
+                Soft, safe and adorable baby product designed
+                with comfort, care and premium quality materials ✨
+
+            </div>
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+                <div class="feature">
+                    🌸 Baby Friendly
+                </div>
+
+                <div class="feature">
+                    🧸 Premium Quality
+                </div>
+
+                <div class="feature">
+                    🚚 Fast Delivery
+                </div>
+
+                <div class="feature">
+                    💖 Loved by Parents
+                </div>
+
+            </div>
+
+            <!-- DELIVERY -->
+
+            <div class="delivery">
+
+                <strong>
+                    Delivery Availability 🚚
+                </strong>
+
+                <input 
+                    type="text"
+                    placeholder="Enter Pincode"
+                >
+
+            </div>
+
+            <!-- BUTTONS -->
+
+            <div class="actions">
+
+                <a href="/products/addtocart/<%= product._id %>">
+
+                    <button class="btn cart-btn">
+                        Add To Cart 🛒
+                    </button>
+
+                </a>
+
+                <a href="/products/wishlist/<%= product._id %>">
+
+                    <button class="btn wishlist-btn">
+                        ❤️
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- REVIEWS SECTION -->
+
+<div class="reviews-section">
+
+    <h2>Customer Reviews ⭐</h2>
+
+    <!-- REVIEW FORM -->
+
+    <form 
+        action="/products/review/<%= product._id %>" 
+        method="POST"
+        class="review-form"
+    >
+
+        <select name="rating" required>
+
+            <option value="">Select Rating</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+
+        </select>
+
+        <textarea 
+            name="comment"
+            placeholder="Write your review..."
+            required
+        ></textarea>
+
+        <button type="submit">
+            Submit Review
+        </button>
+
+    </form>
+
+    <!-- REVIEWS LIST -->
+
+    <% if(product.reviews && product.reviews.length > 0){ %>
+
+        <% product.reviews.reverse().forEach(review => { %>
+
+            <div class="review-card">
+
+                <div class="review-top">
+
+                    <h4>
+                        👤 <%= review.user %>
+                    </h4>
+
+                    <span>
+                        ⭐ <%= review.rating %>
+                    </span>
+
+                </div>
+
+                <p>
+                    <%= review.comment %>
+                </p>
+
+            </div>
+
+        <% }) %>
+
+    <% } else { %>
+
+        <div class="no-review">
+
+            No reviews yet ⭐
+
+        </div>
+
+    <% } %>
+
+</div>
+
+</body>
+</html>

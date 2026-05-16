@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            margin: 0;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container">
+
+    <h2>Admin Panel 🧑‍💼</h2>
+
+    <form action="/products/create" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="name" placeholder="Product name" required>
+
+    <input type="number" name="price" placeholder="Price" required>
+
+<select name="category" required>
+
+    <option value="">Select Category</option>
+
+    <option value="Toys">Toys</option>
+    <option value="Girl Fashion">Girl Fashion</option>
+    <option value="Boys Fashion">Boys Fashion</option>
+    <option value="Feeding">Feeding</option>
+    <option value="Nursery">Nursery</option>
+    <option value="Gifts">Gifts</option>
+    <option value="Books">Books</option>
+    <option value="Bath">Bath</option>
+    <option value="Footwear">Footwear</option>
+
+</select>
+
+<input 
+    type="file" 
+    name="image" 
+    id="imageInput"
+    multiple
+    required
+>
+
+<img id="preview" src="" style="width:150px; margin-top:10px; display:none;" />
+
+<button type="submit">Add Product</button>
+
+</form>
+
+</div>
+
+</body>
+<script>
+    const input = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+
+    input.addEventListener("change", function(){
+        const file = this.files[0];
+
+        if(file){
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Peekaboo 🍼</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            
+        }
+
+        img{
+    border-radius:25px;
+}
+
+        body{
+            font-family:'Fredoka', sans-serif;;
+background:linear-gradient(
+                    to bottom,
+                  #fff7f2,
+                  #fdf6ef,  
+                  #fffaf7
+                );
+            color:#333;
+        }
+
+                   img{
+    border-radius:25px;
+}
+
+        /* NAVBAR */
+
+    .navbar{
+    width:100%;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(10px);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 15px rgba(0,0,0,0.04);
+}
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    font-size:38px;
+    font-weight:700;
+    color:#d48c6a;
+
+    /* margin-left:20px; */
+}
+
+.logo-img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-family:'Fredoka', sans-serif;
+}
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+            align-items:center;
+        }
+
+        .nav-links a{
+        font-size:22px;
+            text-decoration:none;
+            color:#333;
+            font-weight:bold;
+        }
+
+        .nav-btn{
+            background:#f3c8aa;
+            padding:10px 18px;
+            border-radius:30px;
+        }
+
+        /* HERO */
+
+        .hero{
+            width:100%;
+            min-height:90vh;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            align-items:center;
+            padding:60px 8%;
+            gap:40px;
+        }
+
+        .hero-text h1{
+            font-family:'Pacifico', cursive;
+            font-weight:normal;
+            font-size:60px;
+            line-height:1.2;
+            margin-bottom:20px;
+            color:#3d2f2f;
+        }
+
+        .hero-text p{
+            font-size:19px;
+            color:#666;
+            line-height:1.8;
+            margin-bottom:30px;
+        }
+
+        .hero-btns{
+            
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:14px 28px;
+            border:none;
+            border-radius:40px;
+            cursor:pointer;
+            font-size:16px;
+            font-weight:bold;
+            transition:0.3s;
+            text-decoration:none;
+            display:inline-block;
+        }
+
+        .btn-primary{
+    background:#e7b393;
+    color:#fff;
+    box-shadow:0 6px 15px rgba(231,179,147,0.3);
+}
+
+        .btn-primary:hover{
+            background:#d79f7d;
+            transform:translateY(-2px);
+        }
+
+        .btn-secondary{
+            background:white;
+            color:#333;
+            border:1px solid #ddd;
+        }
+
+        .hero-image img{
+            width:100%;
+            border-radius:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* CATEGORY SECTION */
+
+        .section{
+            padding:80px 8%;
+        }
+
+        .section-title{
+            font-family:'Pacifico', cursive;
+            font-weight:normal;
+            font-size:40px;
+            margin-bottom:40px;
+            text-align:center;
+            color:#3d2f2f;
+        }
+
+        .categories{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:25px;
+        }
+
+        .category-card{
+            background:#fffaf8;
+            padding:35px 20px;
+            border-radius:25px;
+            text-align:center;
+            transition:0.3s;
+            box-shadow:0 5px 20px rgba(0,0,0,0.05);
+            border:2px solid #fff;
+
+        }
+
+        .category-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .category-icon{
+            font-size:55px;
+            margin-bottom:20px;
+        }
+
+        .category-card h3{
+            margin-bottom:10px;
+        }
+
+        .category-card p{
+            color:#777;
+            line-height:1.6;
+        }
+
+        /* FEATURED PRODUCTS */
+
+        .products{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:35px;
+        }
+
+        .product-card{
+    background:#fffaf7;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,0.06);
+    transition:0.3s;
+    border:2px solid #fff;
+}
+
+        .product-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 15px 35px rgba(232,184,155,0.35);
+        }
+
+        .product-card img{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    background:#fff;
+    padding:20px;
+    border-radius:25px 25px 0 0;
+}
+
+       .product-info{
+    padding:15px 20px 25px;
+    text-align:center;
+}
+
+        .product-info h3{
+    font-size:24px;
+    margin-bottom:8px;
+    color:#4a3a3a;
+}
+
+        .price{
+            color:#d48c6a;
+            font-weight:bold;
+            font-size:20px;
+            margin:10px 0;
+        }
+
+        /* SPECIAL SECTION */
+
+        .special{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:40px;
+            align-items:center;
+            background:#fff5ee;
+            border-radius:30px;
+            padding:50px;
+        }
+
+        .special img{
+            width:100%;
+            border-radius:25px;
+        }
+
+        .special h2{
+            font-family:'Pacifico', cursive;
+            font-weight:normal;
+            font-size:42px;
+            margin-bottom:20px;
+        }
+
+        .special p{
+            color:#666;
+            line-height:1.8;
+            margin-bottom:25px;
+        }
+
+        /* FOOTER */
+
+        footer{
+            background:#f3c8aa;
+            padding:40px 8%;
+            margin-top:60px;
+            text-align:center;
+            color:#fff;
+        }
+
+        footer h2{
+            margin-bottom:10px;
+        }
+
+        footer p{
+            color:#fffaf5;
+        }
+
+        .floating{
+    position:fixed;
+    top:100px;
+    left:20px;
+    font-size:50px;
+    opacity:0.4;
+}
+
+.floating2{
+    position:fixed;
+    right:30px;
+    top:200px;
+    font-size:50px;
+    opacity:0.4;
+}
+
+.floating3{
+    position:fixed;
+    bottom:80px;
+    left:40px;
+    font-size:40px;
+    opacity:0.3;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .hero,
+            .special{
+                grid-template-columns:1fr;
+            }
+
+            .hero-text h1{
+                font-size:40px;
+            }
+
+            .nav-links{
+                gap:12px;
+                font-size:14px;
+            }
+
+            .section-title{
+                font-size:32px;
+            }
+
+            .special{
+                padding:30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="floating">☁️</div>
+<div class="floating2">🎈</div>
+<div class="floating3">⭐</div>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+
+    <img 
+        src="/uploads/logo.png"
+        class="logo-img"
+    >
+
+    <div class="logo-text">
+        Peekaboo
+    </div>
+
+</div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/products/shop">Shop</a>
+            <a href="/users/cart">Cart</a>
+            <a href="/users/wishlist">Wishlist</a>
+            <a href="/users/orders">Orders</a>
+
+            <% if(user){ %>
+
+                <a href="/users/logout" class="nav-btn">
+                    Logout
+                </a>
+
+            <% } else { %>
+
+                <a href="/users/login" class="nav-btn">
+                    Login
+                </a>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+    Little Things,<br>
+    Big Love 🧸
+</h1>
+
+            <p>
+                Discover adorable baby essentials made with comfort, care, and love. From toys to clothing, everything your little one needs is right here.
+            </p>
+            <p style="
+            font-size: 23px;
+    margin-top:15px;
+    color:#d48c6a;
+    font-weight:bold;
+">
+    Trusted by happy parents 💖
+</p>
+
+            <div class="hero-btns">
+
+                <a href="/products/shop" class="btn btn-primary">
+                    Shop Now
+                </a>
+
+                <a href="#featured" class="btn btn-secondary">
+                    Explore
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="https://images.unsplash.com/photo-1514090458221-65bb69cf63e6?q=80&w=1200&auto=format&fit=crop">
+
+        </div>
+
+    </section>
+
+    <!-- CATEGORIES -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Shop By Category ✨
+        </h2>
+
+        <div class="categories">
+
+            <div class="category-card">
+                <div class="category-icon">🧸</div>
+                <h3>Toys</h3>
+                <p>Soft toys and fun learning games for babies.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">👕</div>
+                <h3>Clothes</h3>
+                <p>Comfortable and adorable baby outfits.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🍼</div>
+                <h3>Feeding</h3>
+                <p>Bottles, bowls, spoons, and feeding accessories.</p>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🧴</div>
+                <h3>Care</h3>
+                <p>Safe skincare and hygiene products for babies.</p>
+            </div>
+
+        </div>
+        <div style="text-align:center; margin-top:40px;">
+
+    <a href="/products/shop" class="btn btn-primary">
+        Explore All Categories ✨
+    </a>
+
+</div>
+
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+
+    <section class="section" id="featured">
+
+        <h2 class="section-title">
+            Featured Products 🌟
+        </h2>
+
+        <div class="products">
+
+            <% products.forEach(product => { %>
+
+                <div class="product-card">
+
+                    <img src="/uploads/<%= product.image[0] %>">
+
+                    <div class="product-info">
+
+                        <h3><%= product.name %></h3>
+
+                        <p class="price">
+                            ₹ <%= product.price %>
+                        </p>
+
+                        <a href="/products/product/<%= product._id %>" class="btn btn-primary">
+    View Product
+</a>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </section>
+
+    <!-- SPECIAL SECTION -->
+
+    <section class="section">
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+            margin-bottom:50px;
+        ">
+
+            <img 
+                src="https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=1200&auto=format&fit=crop"
+                style="width:100%; height:250px; object-fit:cover; border-radius:25px;"
+            >
+
+            <img 
+                src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop"
+                style="width:100%; height:250px; object-fit:cover; border-radius:25px;"
+            >
+
+            <img 
+                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1200&auto=format&fit=crop"
+                style="width:100%; height:250px; object-fit:cover; border-radius:25px;"
+            >
+
+        </div>
+
+        <div class="special">
+
+            <div>
+
+                <h2>
+                    Made With Love 💖
+                </h2>
+
+                <p>
+                    Every product in Peekaboo is carefully selected to provide comfort, safety, and happiness for your little one.
+                </p>
+
+                <a href="/products/shop" class="btn btn-primary">
+                    Discover More
+                </a>
+
+            </div>
+
+            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop">
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>Peekaboo 🍼</h2>
+
+        <p>
+            Made with love for little smiles ✨
+        </p>
+
+    </footer>
+
+</body>
+</html>
+```
+
+

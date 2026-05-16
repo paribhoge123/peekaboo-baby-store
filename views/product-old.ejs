@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title><%= product.name %></title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f5f5f5;
+            margin:0;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+            padding:30px;
+        }
+
+        .product{
+            background:white;
+            padding:20px;
+            border-radius:15px;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:30px;
+        }
+
+        .product img{
+            width:100%;
+            border-radius:12px;
+        }
+
+        .review-box{
+            background:white;
+            padding:20px;
+            margin-top:30px;
+            border-radius:15px;
+        }
+
+        textarea, select{
+            width:100%;
+            padding:10px;
+            margin:10px 0;
+        }
+
+        button{
+            padding:12px 20px;
+            background:black;
+            color:rgb(123, 20, 20);
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        .review{
+            border-bottom:1px solid #ddd;
+            padding:10px 0;
+        }
+
+        @media(max-width:768px){
+
+            .product{
+                grid-template-columns:1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<%- include("partials/navbar") %>
+
+<div class="container">
+
+    <div class="product">
+
+        <div>
+            <img src="/uploads/<%= product.image[0] %>">
+        </div>
+
+        <div>
+
+            <h1><%= product.name %></h1>
+
+            <h2>₹ <%= product.price %></h2>
+
+            <p>
+                Category: <%= product.category %>
+            </p>
+
+            <a href="/products/addtocart/<%= product._id %>">
+
+                <button>
+                    Add To Cart 🛒
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+   <!-- REVIEWS -->
+
+<div class="review-box">
+
+    <h1 style="color:red;">
+        REVIEWS SECTION WORKING
+    </h1>
+
+    <h2>Reviews ⭐</h2>
+
+        <!-- REVIEW FORM -->
+
+        <form action="/products/review/<%= product._id %>" method="POST">
+
+            <select name="rating" required>
+
+                <option value="">Select Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+
+            </select>
+
+            <textarea 
+                name="comment"
+                placeholder="Write review..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                Submit Review
+            </button>
+
+        </form>
+
+        <hr>
+
+        <!-- REVIEW LIST -->
+
+       <% if(product.reviews && product.reviews.length > 0){ %>
+
+    <% product.reviews.forEach(review => { %>
+
+        <div class="review">
+
+            <h4><%= review.user %></h4>
+
+            <p>
+                Rating: <%= review.rating %> ⭐
+            </p>
+
+            <p>
+                <%= review.comment %>
+            </p>
+
+        </div>
+
+    <% }) %>
+
+<% } else { %>
+
+    <p>No reviews yet ⭐</p>
+
+<% } %>
+
+    </div>
+
+</div>
+
+</body>
+</html>
