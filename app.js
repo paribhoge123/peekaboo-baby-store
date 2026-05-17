@@ -27,7 +27,7 @@ app.use(function(req, res, next){
 
     if(token){
         try{
-            let data = jwt.verify(token, "secretkey");
+           let data = jwt.verify(token, process.env.JWT_SECRET);
             res.locals.user = data; // ✅ available in ALL views
         } catch(err){
             res.locals.user = null;
@@ -60,4 +60,8 @@ app.get("/success", function(req, res){
     res.render("success");
 });
 
-app.listen(3000);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log("Server running on port " + PORT);
+});
